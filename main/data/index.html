@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Alerma de Exceso de Velocidad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
+
+</head>
+
+<body>
+  <h1 class="text-center mt-4">Configurador de Exceso de Velocidad GPS</h1>
+
+  <div class="container">
+    <div class="card-body">
+      <div class="row mt-4 d-flex justify-content-center">
+        <div class="card-container col-md-6 py-4 px-4">
+          <div class="form-group row justify-content-center">
+            <div class="form-group row justify-content-between">
+              <a href="/on"><button class="button">ON</button></a>
+              <a href="/off"><button class="button button2">OFF</button></a>
+              <a href=/read> <button class="button button2">Cargar</button></a>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="card-body">
+          <div class="row mt-4 d-flex justify-content-center">
+            <div class="card-container col-md-6 py-4 px-4">
+              <div class="form-group row justify-content-center">
+                <p>Buzzin<strong> %ESTADO%</strong></p>
+                <p>
+
+                </p>
+                <p>
+                  <span class="sensor-labels" class="col-sm-2 col-form-label col-form-label-lg">Velcidad: </span>
+                  <span id="velocidad">%VELOCIDAD%</span>
+                  <sup class="units">Km/h</sup>
+                </p>
+                <p>
+                  <span class="sensor-labels" class="col-sm-2 col-form-label col-form-label-lg">Longitud: </span>
+                  <span id="longitud">%LOGITUD GPS%</span>
+                  <sup class="units">°</sup>
+                </p>
+                <p>
+                  <span class="sensor-labels" class="col-sm-2 col-form-label col-form-label-lg">Latitud: </span>
+                  <span id="latitud">%LATITUD GPS%</span>
+                  <sup class="units">°</sup>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="card-body">
+          <div class="row mt-4 d-flex justify-content-center">
+            <div class="card-container col-md-6 py-4 px-4">
+              <div class="form-group row justify-content-center">
+                <form action="/config.html">
+                  <div class="form-group row justify-content-between">
+                    <label for="speed" class="col-sm-2 col-form-label col-form-label-lg">Velocidad</label>
+                    <input type="number" id="speed" name="speed" class="col-md-5 form-control" placeholder="80">
+                  </div>
+                  <div class="form-group row justify-content-between">
+                    <label for="wifi" class="col-sm-2 col-form-label col-form-label-lg">Nombre</label>
+                    <input type="text" id="wifi" name="name" class="col-md-5 form-control" placeholder="Ficha-110">
+                  </div>
+                  <div class="form-group row justify-content-between">
+                    <label for="password" class="col-sm-2 col-form-label col-form-label-lg">Contraseña</label>
+                    <input type="text" id="password" name="password" class="col-md-5 form-control"
+                      placeholder="Contraseña">
+                  </div>
+
+                  <div class="form-group row justify-content-between">
+                    <div class="col-md-4">
+                      <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                    </div>
+                  </div>
+
+                </form>
+
+
+</body>
+<script>
+  setInterval(function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("velocidad").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/velocidad", true);
+    xhttp.send();
+  }, 10000);
+
+  setInterval(function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("longitud").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/longitud", true);
+    xhttp.send();
+  }, 10000);
+
+  setInterval(function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("latitud").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/latitud", true);
+    xhttp.send();
+  }, 10000);
+</script>
+
+</html>
